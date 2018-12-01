@@ -7,6 +7,17 @@
   <body>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
-    <button type="button">Click Me!</button>
+    <button onclick="FlashLED()">Click Me!</button>
+	<script>
+		function FlashLED() {
+		if (LED.readSync() == 0) 
+		{
+			LED.writeSync(1);
+		} else {
+			LED.writeSync(0);
+		}
+		}
+	</script?
+	<button ">
   </body>
 </html>
