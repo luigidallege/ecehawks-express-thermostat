@@ -35,4 +35,4 @@ process.on('SIGINT', function () { //on ctrl+c
   LED.writeSync(0); // Turn LED off
   LED.unexport(); // Unexport LED GPIO to free resources
   process.exit(); //exit completely
-});
+};
