@@ -22,8 +22,9 @@ function renderHTML(path, response) {
 }
 
 function handler (req, res) { //create server
-      var path = url.parse(req.url).pathname;
-      console.log(path)
+      var hostname = req.headers.host; // hostname = 'localhost:8080'
+      var path = url.parse(req.url).pathname; // pathname = '/MyApp'
+      console.log('http://' + hostname + path);
       switch (path) {
           case '/':
               renderHTML('/views/index.html', res);
