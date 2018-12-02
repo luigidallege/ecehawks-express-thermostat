@@ -7,16 +7,34 @@ var LED = new Gpio(21, 'out'); //use GPIO pin 4 as output
 
 http.listen(8080); //listen to port 8080
 
-function handler (req, res) { //create server
-  fs.readFile(__dirname + '/views/index.ejs', function(err, data) { //read file index.html in public folder
-    if (err) {
-      res.writeHead(404, {'Content-Type': 'text/html'}); //display 404 on error
-      return res.end("404 Not Found");
-    } 
-    res.writeHead(200, {'Content-Type': 'text/html'}); //write HTML
-    res.write(data); //write data from index.html
-    return res.end();
+function renderHTML(path, response) {
+  fs.readFile(path, null, function(error, data) {
+      if (error) {
+          response.writeHead(404);
+          response.write('File not found!');
+      } else {
+          response.write(data);
+      }
+      response.end();
   });
+}
+
+function handler (req, res) { //create server
+  response.writeHead(200, {'Content-Type': 'text/html'});
+
+      var path = url.parse(request.url).pathname;
+      switch (path) {
+          case '/':
+              renderHTML('/views/index.html', response);
+              break;
+          case '/login':
+              renderHTML('/views/scheduler.html', response);
+              break;
+          default:
+              response.writeHead(404);
+              response.write('Route not defined');
+              response.end();
+      }
 }
 
 io.sockets.on('connection', function (socket) {// WebSocket Connection
