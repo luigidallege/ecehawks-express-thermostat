@@ -9,7 +9,7 @@ var LED = new Gpio(21, 'out'); //use GPIO pin 4 as output
 http.listen(8080); //listen to port 8080
 
 function renderHTML(path, response) {
-  fs.readFile(_dirname + path, function(error, data) {
+  fs.readFile(__dirname + path, function(error, data) {
       if (error) {
           response.writeHead(404);
           response.write('File not found!');
