@@ -6,33 +6,6 @@
   <script src="/public/javascripts/main-page.js"></script>
   <script src="/public/javascripts/adjust-temp.js"></script>
   <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
-  <script>
-    function startTime() {
-        var today = new Date();
-        var h = today.getHours();
-        var ampm = 'AM'
-        if (h > 12) {
-            h -= 12;
-            ampm = 'PM'
-        } else if (h === 0) {
-          h = 12;
-        }
-        var m = today.getMinutes();
-        m = checkTime(m);
-
-        document.getElementById('time').innerHTML = h + ":" + m + " " + ampm;
-        var t = setTimeout(startTime, 1000);
-
-        var months = ["Jan.", "Feb.", "Mar.", "Apr.", "May", "June", "July", "Aug.", "Sept.", "Oct.", "Nov.", "Dec."];
-        var days = ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"];
-        var date = days[today.getDay()] + ', ' + months[today.getMonth()] + ' ' + today.getDate()
-        document.getElementById("date").innerHTML = date;
-    }
-    function checkTime(i) {
-        if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
-        return i;
-    }
-  </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script> <!-- include socket.io client side script -->
   <script>
     var socket = io(); //load socket.io-client and connect to the host that serves the page
