@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Thermostat</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
+    <script src="/javascripts/set-points.js"></script>
+</head>
+
+<body>
+  <div id="screen">
+      <% include ./partials/nav.2.ejs %>
+
+      <div id="main">
+        <div id="day-selecter-container">
+          <button class="button schedule-btn" onclick="onDaySelectionClick('Weekdays')">Weekdays</button>
+          <button class="button schedule-btn" onclick="onDaySelectionClick('Weekends')">Weekends</button>
+        </div>
+
+        <div id="schedule-selecter-container">
+          <button class="button" onclick="onSetPointClick(1)">1</button>
+          <button class="button" onclick="onSetPointClick(2)">2</button>
+          <button class="button" onclick="onSetPointClick(3)">3</button>
+          <button class="button" onclick="onSetPointClick(4)">4</button>
+        </div>
+
+        <div id="enable-edit-container">
+          
+          <label class="switch">
+            <input type="checkbox" id="setpoint-check" unchecked onclick="enableDisableSetPoint()">
+            <span class="slider round"></span>
+          </label>
+          <p id="onoff-text" class="label">OFF</p>
+
+          <a href="/setpoints/edit/time" class="button schedule-btn">EDIT</a>
+        </div>
+      </div>
+  </div>
+</body>
+</html>

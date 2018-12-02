@@ -7,17 +7,37 @@ var LED = new Gpio(21, 'out'); //use GPIO pin 4 as output
 
 http.listen(8080); //listen to port 8080
 
-function handler (req, res) { //create server
-  fs.readFile(__dirname + '/views/index.ejs', function(err, data) { //read file index.html in public folder
-    if (err) {
-      res.writeHead(404, {'Content-Type': 'text/html'}); //display 404 on error
-      return res.end("404 Not Found");
-    } 
-    res.writeHead(200, {'Content-Type': 'text/html'}); //write HTML
-    res.write(data); //write data from index.html
-    return res.end();
+function renderHTML(path, response) {
+  fs.readFile(__dirname + path, function(error, data) {
+      if (error) {
+        response.writeHead(404);
+        response.write('File not found!');
+      }
+
+      response.writeHead(200, {'Content-Type': 'text/html'});
+      response.write(data);
+      response.end();
   });
 }
+
+function handler (req, res) { //create server
+      var hostname = req.headers.host; // hostname = 'localhost:8080'
+      var path = url.parse(req.url).pathname; // pathname = '/MyApp'
+      console.log('http://' + hostname + path);
+      switch (path) {
+          case '/':
+              renderHTML('/views/index.html', res);
+              break;
+          case '/setpoints':
+              renderHTML('/views/scheduler.html', res);
+              break;
+          default:
+              res.writeHead(404);
+              res.write('Route not defined');
+              res.end();
+      }
+}
+
 
 io.sockets.on('connection', function (socket) {// WebSocket Connection
   var lightvalue = 0; //static variable for current status
