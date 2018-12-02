@@ -13,16 +13,17 @@ function renderHTML(path, response) {
       if (error) {
         response.writeHead(404);
         response.write('File not found!');
-      } else {
-        response.writeHead(200, {'Content-Type': 'text/html'});
-        response.write(data);
       }
+
+      response.writeHead(200, {'Content-Type': 'text/html'});
+      response.write(data);
       response.end();
   });
 }
 
 function handler (req, res) { //create server
       var path = url.parse(req.url).pathname;
+      console.log(path)
       switch (path) {
           case '/':
               renderHTML('/views/index.html', res);
