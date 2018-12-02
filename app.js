@@ -20,20 +20,20 @@ function renderHTML(path, response) {
 }
 
 function handler (req, res) { //create server
-  response.writeHead(200, {'Content-Type': 'text/html'});
+  res.writeHead(200, {'Content-Type': 'text/html'});
 
-      var path = url.parse(request.url).pathname;
+      var path = url.parse(req.url).pathname;
       switch (path) {
           case '/':
-              renderHTML('/views/index.html', response);
+              renderHTML('/views/index.html', res);
               break;
           case '/login':
-              renderHTML('/views/scheduler.html', response);
+              renderHTML('/views/scheduler.html', res);
               break;
           default:
-              response.writeHead(404);
-              response.write('Route not defined');
-              response.end();
+              res.writeHead(404);
+              res.write('Route not defined');
+              res.end();
       }
 }
 
